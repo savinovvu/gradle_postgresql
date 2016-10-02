@@ -1,13 +1,14 @@
 package ru.inbox.savinov_vu.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.inbox.savinov_vu.model.Human;
 import ru.inbox.savinov_vu.to.DTO;
-import ru.inbox.savinov_vu.to.DTOImpl;
 
 import java.util.List;
 
 public class ServiceImpl implements Service {
-    DTO dto = new DTOImpl();
+    @Autowired
+    DTO dto;
 
     public List<Human> read() {
         return dto.readAll();

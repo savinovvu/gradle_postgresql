@@ -1,15 +1,13 @@
 package ru.inbox.savinov_vu.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.inbox.savinov_vu.service.Service;
-import ru.inbox.savinov_vu.service.ServiceImpl;
 
 public class HumanController {
-    static Service service = new ServiceImpl();
+    @Autowired
+    private Service service;
 
-
-    public static void main(String[] args) throws ClassNotFoundException {
-       // service.delete(new Human(1,"Иван45", "356"));
-
+    public void start()  {
 
         service.read().forEach(System.out::println);
 
