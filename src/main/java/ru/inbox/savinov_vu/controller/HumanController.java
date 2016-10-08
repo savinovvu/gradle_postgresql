@@ -8,7 +8,6 @@ public class HumanController {
     private Service service;
 
     public void start()  {
-
         service.read().forEach(System.out::println);
 
 

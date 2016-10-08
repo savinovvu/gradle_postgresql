@@ -8,7 +8,7 @@ public class SpringUtil {
     private SpringUtil(){}
 
   public  static void main(String[] args)  {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"config.xml"});
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"Spring/config.xml"});
       HumanController controller = (HumanController) context.getBean("controller");
       controller.start();
     }

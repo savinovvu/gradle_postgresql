@@ -1,11 +1,19 @@
-package ru.inbox.savinov_vu.model;
+package ru.inbox.savinov_vu.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
-public class Human implements Serializable {
 
+@Entity
+@Table(name = "human")
+@NamedQuery(name = "Human.getAll", query = "SELECT c from Human c")
+public class Human implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "phonenumber")
     private String phoneNumber;
 
     public void setId(int id) {

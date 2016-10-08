@@ -1,6 +1,6 @@
 package ru.inbox.savinov_vu.to;
 
-import ru.inbox.savinov_vu.model.Human;
+import ru.inbox.savinov_vu.entity.Human;
 
 import java.util.List;
 
@@ -12,5 +12,7 @@ public interface DTO {
     public List<Human> readAll();
     public void update(Human human);
     public void delete(Human human);
+
+    public Human getOnId(int id);
 }
 
