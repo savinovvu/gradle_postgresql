@@ -1,3 +1,4 @@
+/*
 package ru.inbox.savinov_vu.util;
 
 import com.google.gson.Gson;
@@ -12,4 +13,4 @@ public class JsonTransformer implements ResponseTransformer {
         return gson.toJson(model);
     }
 
-}
+}*/

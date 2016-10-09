@@ -1,5 +1,7 @@
 package ru.inbox.savinov_vu.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -10,10 +12,13 @@ import java.io.Serializable;
 public class Human implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty("id")
     private int id;
     @Column(name = "name")
+    @JsonProperty("name")
     private String name;
     @Column(name = "phonenumber")
+    @JsonProperty("phonenumber")
     private String phoneNumber;
 
     public void setId(int id) {
