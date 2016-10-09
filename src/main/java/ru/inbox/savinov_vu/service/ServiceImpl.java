@@ -1,17 +1,20 @@
 package ru.inbox.savinov_vu.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.inbox.savinov_vu.entity.Human;
 import ru.inbox.savinov_vu.to.DTO;
-
-import java.util.List;
 
 public class ServiceImpl implements Service {
     @Autowired
     DTO dto;
 
-    public List<Human> read() {
-        return dto.readAll();
+    public String read() throws JsonProcessingException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(dto.readAll());
+
     }
 
     @Override

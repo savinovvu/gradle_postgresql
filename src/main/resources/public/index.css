@@ -25,25 +25,43 @@ td {
     vertical-align: middle;
     padding: 10px;
     font-size: 14px;
-    text-align: center;
     border: 1px solid #56433D;
     border-left: none;
     border-right: none;
+    text-align: center;
 }
 
+input{
+    text-align: center;
+    border-color: transparent;
+    font-size: 14px;
+}
+
+/*
 .red {
     color: red;
-}
+}*/
 
 .deleteButton {
-    color: white;
     background: red;
+}
+
+
+
+.editButton {
+    background: blue;
+}
+
+.btn {
+    color: white;
+    transform: scale(1.1);
     border-radius: 50%;
 }
 
-.editButton {
-    color: white;
-    background: blue;
-    border-radius: 50%;
 
+.btn:hover {
+    color: yellow;
+    background: green;
+    transform: scale(1.2);
+    border-radius: 50%;
 }

@@ -2,6 +2,7 @@ package ru.inbox.savinov_vu.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.inbox.savinov_vu.entity.Human;
 import ru.inbox.savinov_vu.service.Service;
 
 import static spark.Spark.post;
@@ -12,32 +13,20 @@ public class HumanController {
     private Service service;
 
     public void start()  {
-    /*   service.read().forEach(System.out::println);
-*/
+
 
         staticFileLocation("/public");
 
 
 
-        post("/readAll", (request, response) -> {
+        post("/readAll", (request, response) -> service.read());
+
+        post("/remove", (request, response) -> {
             ObjectMapper mapper = new ObjectMapper();
-            String jsonOut = mapper.writeValueAsString(service.read());
+            Human human = mapper.readValue(request.body(), Human.class);
+            System.out.println("human: " + human);
 
-
-
-            return jsonOut;
-
-                });
-
-        post("/delete", (request, response) -> {
-            System.out.println("тест");
-            ObjectMapper mapper = new ObjectMapper();
-            String jsonOut = mapper.writeValueAsString(service.read());
-
-
-
-            return jsonOut;
-
+            return service.read();
         });
 
 

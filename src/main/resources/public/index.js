@@ -1,12 +1,26 @@
-function login() {
+function getAll() {
+    send("/readAll", "POST");
+}
 
-    var jsonData = JSON.stringify({"id": 1, "name": 2, "number": 3});
+function remove(id) {
+    var jsonData = getJson(id);
+    send("/remove", "POST", jsonData);
+}
+
+function getJson(id) {
+    var objectId = document.getElementById("id-" + id).getAttribute("value");
+    var objectName = document.getElementById("name-" + id).getAttribute("value");
+    var objectPhoneNumber = document.getElementById("phonenumber-" + id).getAttribute("value");
+    //return "{id: " + objectId + ", name: " + objectName + ", phonenumber: " + objectPhoneNumber + "}";
+   return "{\"id\": " + objectId + ", \"name\": \"" + objectName + "\", \"phonenumber\": \"" + objectPhoneNumber + "\"}";
+}
+
+function send(url, type, jsonData) {
     $.ajax({
 
-        url: "/readAll",
-        type: 'POST',
+        url: url,
+        type: type,
         contentType: 'application/text',
-
         data: jsonData,
         success: function (data) {
 
@@ -26,58 +40,40 @@ function login() {
 }
 
 function view(data) {
-    alert(data.length);
     $(".data").remove();
-
+    var i = 0;
     $.each(data, function (key, val) {
         var output = "";
-        output = "<tr class='data'>";
+        output = "<tr class='data'>" +
+            "<form id=\"form-" + i + "\">";
 
         output += "<td>";
-        output += val.id;
+        output += "<input type=\"text\" name=\"id\" id=\"id-" + i + "\" value=\"" + val.id + "\" readonly/>";
         output += "</td>";
 
         output += "<td>";
-        output += val.name;
+        output += "<input type=\"text\" name=\"name\" id=\"name-" + i + "\" value=\"" + val.name + "\" readonly/>";
         output += "</td>";
 
         output += "<td>";
-        output += val.phonenumber;
+        output += "<input type=\"text\" name=\"phonenumber\" id=\"phonenumber-" + i + "\" value=\"" + val.phonenumber + "\" readonly/>";
         output += "</td>";
 
         output += "<td>" +
-            "<form>" +
-            "<input type=\"button\" value=\"Править\" class=\"editButton\">" +
-            "</form>" +
+            "<input type=\"button\" value=\"Править\" class=\"editButton btn\">" +
             "<br>" +
-            "<form>" +
             "<input type=\"hidden\" name=\"action\" value=\"delete\">" +
             "<input type=\"hidden\" name=\"id\" value=\"\">" +
-            "<input type=\"button\" value=\"Удалить\" class=\"deleteButton\">"+
-        "</form>"+
-        "</td>";
+            "<input type=\"button\" value=\"Удалить\" class=\"deleteButton btn\" onclick=\"remove(" + i + ")\">" +
 
-        output += "</tr>";
+            "</td>";
+
+        output += "</form> " +
+            "</tr>";
 
 
         $("#userT").append(output);
 
-
+        i++;
     });
-
-
-    /*
-     *
-
-
-
-
-     </td>
-     </tr>
-     *
-     *
-     *
-     * */
-
-
 }
