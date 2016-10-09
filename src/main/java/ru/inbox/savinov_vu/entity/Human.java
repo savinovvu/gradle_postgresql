@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "human")
 @NamedQuery(name = "Human.getAll", query = "SELECT c from Human c")
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty("id")
@@ -68,5 +68,12 @@ public class Human implements Serializable {
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" + "id: " + id + " name: " + name + " phonenumber: " + phoneNumber + ")";
+    }
+
+
+
+    @Override
+    public int compareTo(Human o) {
+        return this.id - o.id;
     }
 }

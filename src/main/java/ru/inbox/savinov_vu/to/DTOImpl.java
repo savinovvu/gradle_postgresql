@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DTOImpl implements DTO {
 
@@ -20,7 +21,7 @@ public class DTOImpl implements DTO {
 
     public List<Human> readAll() {
         TypedQuery<Human> namedQuery = em.createNamedQuery("Human.getAll", Human.class);
-        return namedQuery.getResultList();
+        return namedQuery.getResultList().stream().sorted(Human::compareTo).collect(Collectors.toList());
     }
 
 
@@ -41,8 +42,6 @@ public class DTOImpl implements DTO {
         em.remove(human);
         em.getTransaction().commit();
     }
-
-
 
 
 }

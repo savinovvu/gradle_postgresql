@@ -7,8 +7,11 @@ import ru.inbox.savinov_vu.entity.Human;
 import ru.inbox.savinov_vu.to.DTO;
 
 public class ServiceImpl implements Service {
+
+
     @Autowired
     DTO dto;
+
 
     public String read() throws JsonProcessingException {
 
@@ -31,7 +34,7 @@ public class ServiceImpl implements Service {
 
     @Override
     public boolean delete(Human human) {
-        dto.delete(human);
+        dto.delete(getOnId(human.getId()));
         return true;
     }
 

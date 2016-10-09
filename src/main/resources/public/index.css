@@ -33,14 +33,14 @@ td {
 
 input{
     text-align: center;
-    border-color: transparent;
     font-size: 14px;
 }
 
-/*
-.red {
-    color: red;
-}*/
+input:read-only{
+    border-color: transparent;
+}
+
+
 
 .deleteButton {
     background: red;
@@ -65,3 +65,4 @@ input{
     transform: scale(1.2);
     border-radius: 50%;
 }
+
