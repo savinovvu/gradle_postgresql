@@ -7,9 +7,9 @@ import java.io.Serializable;
 
 
 @Entity
-@Table(name = "human")
-@NamedQuery(name = "Human.getAll", query = "SELECT c from Human c")
-public class Human implements Serializable, Comparable<Human> {
+@Table(name = "files")
+@NamedQuery(name = "Files.getAll", query = "SELECT c from SavedFile c")
+public class SavedFile implements Serializable, Comparable<SavedFile> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty("id")
@@ -17,9 +17,8 @@ public class Human implements Serializable, Comparable<Human> {
     @Column(name = "name")
     @JsonProperty("name")
     private String name;
-    @Column(name = "phonenumber")
-    @JsonProperty("phonenumber")
-    private String phoneNumber;
+    @Column(name = "loadpath")
+    private String loadpath;
 
     public void setId(int id) {
         this.id = id;
@@ -29,8 +28,8 @@ public class Human implements Serializable, Comparable<Human> {
         this.name = name;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setLoadpath(String loadpath) {
+        this.loadpath = loadpath;
     }
 
     public int getId() {
@@ -41,39 +40,39 @@ public class Human implements Serializable, Comparable<Human> {
         return name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getLoadpath() {
+        return loadpath;
     }
 
-    public Human() {
+    public SavedFile() {
     }
 
 
-    public Human(int id) {
+    public SavedFile(int id) {
         this.id = id;
     }
 
-    public Human(String name, String phoneNumber) {
+    public SavedFile(String name, String loadpath) {
         this.name = name;
-        this.phoneNumber = phoneNumber;
+        this.loadpath = loadpath;
     }
 
-    public Human(int id, String name, String phoneNumber) {
+    public SavedFile(int id, String name, String loadpath) {
         this.id = id;
         this.name = name;
-        this.phoneNumber = phoneNumber;
+        this.loadpath = loadpath;
     }
 
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" + "id: " + id + " name: " + name + " phonenumber: " + phoneNumber + ")";
+        return getClass().getSimpleName() + "(" + "id: " + id + " name: " + name + " phonenumber: " + loadpath + ")";
     }
 
 
 
     @Override
-    public int compareTo(Human o) {
+    public int compareTo(SavedFile o) {
         return this.id - o.id;
     }
 }

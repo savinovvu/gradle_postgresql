@@ -1,5 +1,5 @@
 import org.junit.Test;
-import ru.inbox.savinov_vu.entity.Human;
+import ru.inbox.savinov_vu.entity.SavedFile;
 import ru.inbox.savinov_vu.service.Service;
 
 /**
@@ -11,9 +11,9 @@ public class ServiceTest {
 
     @Test
     public void testCreate() {
-        Human human = new Human("testИван", "777-777");
-        service.create(human);
-        System.out.println(human);
+        SavedFile savedFile = new SavedFile("testИван", "777-777");
+        service.create(savedFile);
+        System.out.println(savedFile);
     }
 
 

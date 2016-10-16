@@ -1,6 +1,6 @@
 package ru.inbox.savinov_vu.to;
 
-import ru.inbox.savinov_vu.entity.Human;
+import ru.inbox.savinov_vu.entity.SavedFile;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -10,36 +10,37 @@ import java.util.stream.Collectors;
 
 public class DTOImpl implements DTO {
 
-    public EntityManager em = Persistence.createEntityManagerFactory("HUMAN").createEntityManager();
+    public EntityManager em = Persistence.createEntityManagerFactory("FILES").createEntityManager();
 
 
-    public void create(Human human) {
+    public void create(SavedFile savedFile) {
+        System.out.println(savedFile);
         em.getTransaction().begin();
-        em.merge(human);
+        em.merge(savedFile);
         em.getTransaction().commit();
     }
 
-    public List<Human> readAll() {
-        TypedQuery<Human> namedQuery = em.createNamedQuery("Human.getAll", Human.class);
-        return namedQuery.getResultList().stream().sorted(Human::compareTo).collect(Collectors.toList());
+    public List<SavedFile> readAll() {
+        TypedQuery<SavedFile> namedQuery = em.createNamedQuery("Files.getAll", SavedFile.class);
+        return namedQuery.getResultList().stream().sorted(SavedFile::compareTo).collect(Collectors.toList());
     }
 
 
-    public void update(Human human) {
+    public void update(SavedFile savedFile) {
         em.getTransaction().begin();
-        em.merge(human);
+        em.merge(savedFile);
         em.getTransaction().commit();
 
     }
 
     @Override
-    public Human getOnId(int id) {
-        return em.find(Human.class, id);
+    public SavedFile getOnId(int id) {
+        return em.find(SavedFile.class, id);
     }
 
-    public void delete(Human human) {
+    public void delete(SavedFile savedFile) {
         em.getTransaction().begin();
-        em.remove(human);
+        em.remove(savedFile);
         em.getTransaction().commit();
     }
 

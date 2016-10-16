@@ -1,34 +1,52 @@
-function getAll() {
-    send("/readAll", "POST");
-}
+$(function(){
+    $('#my_form').on('submit', function(e){
+        e.preventDefault();
+        var $that = $(this),
+            formData = new FormData($that.get(0)); // создаем новый экземпляр объекта и передаем ему нашу форму (*)
+        $.ajax({
+            url: "/file",
+            type: "POST",
+            contentType: false, // важно - убираем форматирование данных по умолчанию
+            processData: false, // важно - убираем преобразование строк по умолчанию
+            data: formData,
+            dataType: 'json',
+            success: function(json){
+                alert("gud");
+                if(json){
+                    $that.replaceWith(json);
+                }
+            },
+            error(){
+                alert("slyapa")
+            }
+        });
+    });
+});
 
 
-function remove(id) {
-    var jsonData = getJson(id);
-    send("/remove", "POST", jsonData);
-}
-
-var updateGlobalHuman = {id: null, name: null, phonenumber: null}
-
-function updateName(argName) {
-    updateGlobalHuman.name = argName;
-}
-
-function updatePhoneNumber(argPhoneNumber) {
-    updateGlobalHuman.phonenumber = argPhoneNumber;
-}
 
 
-function update(id) {
-    var jsonData = getJson(id);
-    send("/update", "POST", jsonData);
+    var upload = document.getElementById("upload");
+    var uploaded = document.getElementById("fileformlabel");
 
-}
+    function getFileNames() {
+        return Array.prototype.map.call(upload.files, function(file) {
 
-function add() {
-    var jsonData = getJson(-1);
-    send("/add", "POST", jsonData)
-}
+            return file.name;
+        });
+    }
+
+    upload.addEventListener("change", function() {
+        var fileName = uploaded.innerHTML = getFileNames();
+        send("/readAll", "POST", jsonData, fileName)
+    });
+
+    function sentFile() {
+        send("/readAll", "POST");
+    }
+
+
+
 
 
 function getJson(id) {
@@ -54,6 +72,36 @@ function getJson(id) {
 }
 
 function send(url, type, jsonData) {
+
+    var input = $("#upload");
+   /* var fd = new FormData;
+    fd.append(input.prop('files')[0]);*/
+    $.ajax({
+
+        url: url,
+        type: type,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+
+        data: "",
+        success: function (data) {
+            view(JSON.parse(data));
+            alert(data);
+        },
+
+        error: function (x) {
+            alert('error', arguments);
+
+
+        }
+
+    });
+    return false;
+}
+
+/*
+    function send(url, type, jsonData) {
     $.ajax({
 
         url: url,
@@ -73,7 +121,7 @@ function send(url, type, jsonData) {
 
     });
     return false;
-}
+}*/
 
 function view(data) {
     $(".data").remove();
