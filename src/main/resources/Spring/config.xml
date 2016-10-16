@@ -7,7 +7,7 @@
 
     <context:component-scan base-package="ru.inbox.savinov_vu.entity"/>
 
-    <bean id="controller" class="ru.inbox.savinov_vu.controller.HumanController"/>
+    <bean id="controller" class="ru.inbox.savinov_vu.controller.SavedFileController"/>
     <bean id="service" class="ru.inbox.savinov_vu.service.ServiceImpl"/>
     <bean id="dto" class="ru.inbox.savinov_vu.to.DTOImpl"/>
 </beans>

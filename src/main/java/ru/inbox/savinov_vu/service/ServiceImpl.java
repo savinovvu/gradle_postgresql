@@ -7,11 +7,14 @@ import ru.inbox.savinov_vu.entity.SavedFile;
 import ru.inbox.savinov_vu.to.DTO;
 
 import javax.servlet.http.Part;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ServiceImpl implements Service {
     @Autowired
@@ -19,8 +22,9 @@ public class ServiceImpl implements Service {
 
     @Override
     public boolean saveFile(Part part) {
-        String fName = part.getSubmittedFileName();
-        System.out.println(fName);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY.MM.dd-hh:mm:ss");
+        String fName = formatter.format(LocalDateTime.now()) +"__" + part.getSubmittedFileName();
+
         Path out = Paths.get("files/" + fName);
         try (final InputStream in = part.getInputStream()) {
             Files.copy(in, out);
@@ -42,11 +46,6 @@ public class ServiceImpl implements Service {
 
     }
 
-    @Override
-    public boolean update(SavedFile savedFile) {
-        dto.update(savedFile);
-        return true;
-    }
 
     @Override
     public boolean create(SavedFile savedFile) {
@@ -56,10 +55,12 @@ public class ServiceImpl implements Service {
 
     @Override
     public boolean delete(SavedFile savedFile) {
-        dto.delete(getOnId(savedFile.getId()));
+        savedFile = getOnId(savedFile.getId());
+        File file = new File(savedFile.getLoadpath());
+        file.delete();
+        dto.delete(savedFile);
         return true;
     }
-
 
     @Override
     public SavedFile getOnId(int id) {

@@ -1,5 +1,6 @@
 package ru.inbox.savinov_vu.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -14,11 +15,16 @@ public class SavedFile implements Serializable, Comparable<SavedFile> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty("id")
     private int id;
+
+
     @Column(name = "name")
     @JsonProperty("name")
     private String name;
     @Column(name = "loadpath")
+    @JsonIgnore
     private String loadpath;
+
+
 
     public void setId(int id) {
         this.id = id;
