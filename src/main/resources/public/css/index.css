@@ -1,4 +1,4 @@
-body{
+body {
     background-color: #858585;
 }
 
@@ -31,22 +31,18 @@ td {
     text-align: center;
 }
 
-input{
+input {
     text-align: center;
     font-size: 14px;
 }
 
-input:read-only{
+input:read-only {
     border-color: transparent;
 }
-
-
 
 .deleteButton {
     background: red;
 }
-
-
 
 .editButton {
     background: blue;
@@ -57,7 +53,6 @@ input:read-only{
     transform: scale(1.1);
     border-radius: 50%;
 }
-
 
 .btn:hover {
     color: yellow;

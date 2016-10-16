@@ -25,7 +25,6 @@ public class SavedFile implements Serializable, Comparable<SavedFile> {
     private String loadpath;
 
 
-
     public void setId(int id) {
         this.id = id;
     }
@@ -74,7 +73,6 @@ public class SavedFile implements Serializable, Comparable<SavedFile> {
     public String toString() {
         return getClass().getSimpleName() + "(" + "id: " + id + " name: " + name + " phonenumber: " + loadpath + ")";
     }
-
 
 
     @Override

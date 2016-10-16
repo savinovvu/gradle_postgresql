@@ -9,8 +9,11 @@ import java.util.List;
  */
 public interface DTO {
     public void create(SavedFile savedFile);
+
     public List<SavedFile> readAll();
+
     public void update(SavedFile savedFile);
+
     public void delete(SavedFile savedFile);
 
     public SavedFile getOnId(int id);

@@ -14,7 +14,6 @@ public class DTOImpl implements DTO {
 
 
     public void create(SavedFile savedFile) {
-        System.out.println(savedFile);
         em.getTransaction().begin();
         em.merge(savedFile);
         em.getTransaction().commit();
@@ -30,6 +29,7 @@ public class DTOImpl implements DTO {
         em.getTransaction().begin();
         em.merge(savedFile);
         em.getTransaction().commit();
+
 
     }
 

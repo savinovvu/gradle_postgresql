@@ -23,7 +23,7 @@ public class ServiceImpl implements Service {
     @Override
     public boolean saveFile(Part part) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY.MM.dd-hh:mm:ss");
-        String fName = formatter.format(LocalDateTime.now()) +"__" + part.getSubmittedFileName();
+        String fName = formatter.format(LocalDateTime.now()) + "__" + part.getSubmittedFileName();
 
         Path out = Paths.get("files/" + fName);
         try (final InputStream in = part.getInputStream()) {

@@ -13,7 +13,6 @@ public interface Service {
 
     public String read() throws JsonProcessingException;
 
-
     public boolean create(SavedFile savedFile);
 
     public boolean delete(SavedFile savedFile);

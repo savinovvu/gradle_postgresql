@@ -35,7 +35,6 @@ public class SavedFileController {
             service.saveFile(request.raw().getParts().stream().findFirst().get());
 
             response.redirect("/readAll");
-            System.out.println("sldfjsldfj");
             return "oK";
         });
 
@@ -51,11 +50,9 @@ public class SavedFileController {
         });
 
         post("/readAll", (request, response) -> {
-            System.out.println("readall" +
-                    "");
+
             String s = service.read();
 
-            System.out.println("s= " + s);
             return s;
         });
 

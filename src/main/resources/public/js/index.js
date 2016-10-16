@@ -32,7 +32,6 @@ function remove(id) {
 }
 
 
-
 function send(url, type, jsonData) {
     $.ajax({
 
