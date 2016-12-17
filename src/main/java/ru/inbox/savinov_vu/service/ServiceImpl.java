@@ -1,71 +1,43 @@
 package ru.inbox.savinov_vu.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.inbox.savinov_vu.entity.SavedFile;
-import ru.inbox.savinov_vu.to.DTO;
+import ru.inbox.savinov_vu.model.Picture;
+import ru.inbox.savinov_vu.repository.SavedPictureRepository;
 
-import javax.servlet.http.Part;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
+@org.springframework.stereotype.Service
 public class ServiceImpl implements Service {
     @Autowired
-    DTO dto;
+    SavedPictureRepository repository;
 
     @Override
-    public boolean saveFile(Part part) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY.MM.dd-hh:mm:ss");
-        String fName = formatter.format(LocalDateTime.now()) + "__" + part.getSubmittedFileName();
+    public boolean save(Picture picture) {
 
-        Path out = Paths.get("files/" + fName);
-        try (final InputStream in = part.getInputStream()) {
-            Files.copy(in, out);
-            create(new SavedFile(fName, "files/" + fName));
-            part.delete();
-        } catch (IOException e) {
-            e.printStackTrace();
             return false;
         }
 
-
-        return true;
-    }
-
+    @Override
     public String read() throws JsonProcessingException {
-
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(dto.readAll());
-
+        return null;
     }
-
 
     @Override
-    public boolean create(SavedFile savedFile) {
-        dto.create(savedFile);
+    public boolean create(Picture savedFile) {
         return false;
     }
 
     @Override
-    public boolean delete(SavedFile savedFile) {
-        savedFile = getOnId(savedFile.getId());
-        File file = new File(savedFile.getLoadpath());
-        file.delete();
-        dto.delete(savedFile);
-        return true;
+    public boolean delete(Picture savedFile) {
+        return false;
     }
 
     @Override
-    public SavedFile getOnId(int id) {
-        return dto.getOnId(id);
+    public Picture getOnId(int id) {
+        return null;
     }
+
 }
+
+
 
 

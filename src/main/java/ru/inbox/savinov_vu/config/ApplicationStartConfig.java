@@ -10,7 +10,9 @@ public class ApplicationStartConfig {
     }
 
     public static void main(String[] args) throws JsonProcessingException {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"Spring/config.xml"});
+        //ClassPathXmlApplicationContext dbcontext = new ClassPathXmlApplicationContext(new String[]{"db/db.xml"});
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"context/config.xml"});
+        //context.setParent(dbcontext);
         SavedFileController controller = (SavedFileController) context.getBean("controller");
         controller.start();
     }

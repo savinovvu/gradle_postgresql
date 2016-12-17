@@ -1,17 +1,10 @@
 package ru.inbox.savinov_vu.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.inbox.savinov_vu.entity.SavedFile;
 import ru.inbox.savinov_vu.service.Service;
 
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import static spark.Spark.*;
+import static spark.Spark.staticFileLocation;
 
 public class SavedFileController {
     @Autowired
@@ -27,14 +20,18 @@ public class SavedFileController {
         int fileSizeThreshold = 1024;
 
 
+        /*Picture picture = new Picture("url1", "loadpath", 5);
+        service.save(picture);*/
+
+/*
         post("/file", "multipart/form-data", (request, response) -> {
-            MultipartConfigElement multipartConfigElement = new MultipartConfigElement(
+      *//*      MultipartConfigElement multipartConfigElement = new MultipartConfigElement(
                     location, maxFileSize, maxRequestSize, fileSizeThreshold);
             request.raw().setAttribute("org.eclipse.jetty.multipartConfig",
                     multipartConfigElement);
             service.saveFile(request.raw().getParts().stream().findFirst().get());
 
-            response.redirect("/readAll");
+            response.redirect("/readAll");*//*
             return "oK";
         });
 
@@ -60,11 +57,11 @@ public class SavedFileController {
         post("/remove", (request, response) -> {
 
             ObjectMapper mapper = new ObjectMapper();
-            SavedFile savedFile = mapper.readValue(request.body(), SavedFile.class);
+            Picture savedFile = mapper.readValue(request.body(), Picture.class);
             service.delete(savedFile);
 
             return service.read();
-        });
+        });*/
 
 
     }
