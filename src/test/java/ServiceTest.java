@@ -1,8 +1,8 @@
-import ru.inbox.savinov_vu.service.Service;
+import ru.inbox.savinov_vu.service.PictureService;
 
 /**
  * Created by skorpion on 08.10.16.
  */
 public class ServiceTest {
-    Service service;
+    PictureService pictureService;
 }

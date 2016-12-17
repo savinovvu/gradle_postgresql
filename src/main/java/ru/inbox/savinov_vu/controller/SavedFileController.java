@@ -2,26 +2,34 @@ package ru.inbox.savinov_vu.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.inbox.savinov_vu.service.Service;
-
-import static spark.Spark.staticFileLocation;
+import ru.inbox.savinov_vu.service.PictureService;
+import ru.inbox.savinov_vu.util.Downloader;
 
 public class SavedFileController {
     @Autowired
-    private Service service;
+    private PictureService pictureService;
+
+    final String location = "files";          // the directory location where files will be stored
+    final long maxFileSize = 100000000;       // the maximum size allowed for uploaded files
+    final long maxRequestSize = 100000000;    // the maximum size allowed for multipart/form-data requests
+    final int fileSizeThreshold = 1024;
 
     public void start() throws JsonProcessingException {
 
-        staticFileLocation("/public");
+       // staticFileLocation("/public");
 
-        String location = "files";          // the directory location where files will be stored
-        long maxFileSize = 100000000;       // the maximum size allowed for uploaded files
-        long maxRequestSize = 100000000;    // the maximum size allowed for multipart/form-data requests
-        int fileSizeThreshold = 1024;
+        //(String strURL, String strPath, int buffSize)
+
+        new Downloader().downloadFiles("http://scontent.cdninstagram.com/t51.2885-15/e15/10611081_365696083587824_1388076795_n.jpg?ig_cache_key=Nzk5ODk0MjkyOTkwMjUzOTM2.2",
+                "files/1.jpg", 1000);
 
 
-        /*Picture picture = new Picture("url1", "loadpath", 5);
-        service.save(picture);*/
+
+
+
+
+
+
 
 /*
         post("/file", "multipart/form-data", (request, response) -> {

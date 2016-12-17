@@ -6,10 +6,11 @@ import ru.inbox.savinov_vu.model.Picture;
 /**
  * Created by skorpion on 27.09.16.
  */
-public interface Service {
+public interface PictureService {
     public boolean save(Picture savedFile);
 
     public String read() throws JsonProcessingException;
+    public String read(int id) throws JsonProcessingException;
 
     public boolean create(Picture savedFile);
 

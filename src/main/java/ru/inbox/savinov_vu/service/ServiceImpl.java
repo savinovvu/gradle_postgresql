@@ -6,7 +6,7 @@ import ru.inbox.savinov_vu.model.Picture;
 import ru.inbox.savinov_vu.repository.SavedPictureRepository;
 
 @org.springframework.stereotype.Service
-public class ServiceImpl implements Service {
+public class ServiceImpl implements PictureService {
     @Autowired
     SavedPictureRepository repository;
 
@@ -19,6 +19,11 @@ public class ServiceImpl implements Service {
     @Override
     public String read() throws JsonProcessingException {
         return null;
+    }
+
+    @Override
+    public String read(int id) throws JsonProcessingException {
+        return String.valueOf(repository.findOne(id));
     }
 
     @Override

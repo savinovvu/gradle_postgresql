@@ -12,13 +12,6 @@ import java.io.Serializable;
 
 public class Picture implements Serializable, Comparable<Picture> {
 
-
-    public Picture(String url, String loadpath, int countLike) {
-        this.url = url;
-        this.loadpath = loadpath;
-        this.countLike = countLike;
-    }
-
     @Id
     @SequenceGenerator(name = "PICT_SEQ", sequenceName = "PICT_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PICT_SEQ")
@@ -40,6 +33,24 @@ public class Picture implements Serializable, Comparable<Picture> {
     private int countLike;
 
 
+    public Picture(String url, String loadpath, int countLike) {
+        this.url = url;
+        this.loadpath = loadpath;
+        this.countLike = countLike;
+    }
+
+    public Picture(){}
+
+
+    @Override
+    public String toString() {
+        return "Picture{" +
+                "id=" + id +
+                ", url='" + url + '\'' +
+                ", loadpath='" + loadpath + '\'' +
+                ", countLike=" + countLike +
+                '}';
+    }
 
     @Override
     public int compareTo(Picture o) {
