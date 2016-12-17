@@ -10,18 +10,7 @@ CREATE SEQUENCE PICT_SEQ
 START WITH 1;
 
 
-/*@Column(name = "url")
-    @JsonProperty("url")
-    private String url;
 
-    @Column(name = "loadpath")
-    @JsonIgnore
-    private String loadpath;
-
-
-    @Column(name = "countLike")
-    @JsonProperty("countLike")
-    private int countLike;*/
 
 CREATE TABLE pictures
 (
