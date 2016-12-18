@@ -1,2 +1,7 @@
-This is spark-java crud with the postgresql project. Front-end is html and js with jQuery ajax. 
-Back-end is spark-java controller, the Hibernate with JPA-api and spring with ioc.
+Implement technologies:
+Front-End: html, css, jquery, ajax;
+Back-End:
+WEB - Spark-java, Jackson.
+Service - Jsoup.
+Data Base - HSQLDB, Spring-data-jpa.
+Dependency injection - Spring context.
