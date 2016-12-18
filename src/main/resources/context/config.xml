@@ -15,7 +15,7 @@
 
 <context:component-scan base-package="ru.inbox.savinov_vu.model"/>
 
-    <bean id="controller" class="ru.inbox.savinov_vu.controller.SavedFileController"/>
+    <bean id="controller" class="ru.inbox.savinov_vu.controller.PictureController"/>
     <bean id="service" class="ru.inbox.savinov_vu.service.ServiceImpl"/>
 
 
@@ -23,7 +23,7 @@
 
     <jdbc:initialize-database data-source="dataSource" enabled="${database.init}" >
         <jdbc:script location="${jdbc.initLocation}"/>
-        <jdbc:script encoding="utf-8" location="${jdbc.populateLocation}"/>
+      <!--  <jdbc:script encoding="utf-8" location="${jdbc.populateLocation}"/>-->
     </jdbc:initialize-database>
 
 

@@ -1,16 +1,14 @@
 package ru.inbox.savinov_vu.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 
 @Entity
 @Table(name = "pictures")
 
-public class Picture implements Serializable, Comparable<Picture> {
+public class Picture {
 
     @Id
     @SequenceGenerator(name = "PICT_SEQ", sequenceName = "PICT_SEQ", allocationSize = 1)
@@ -24,7 +22,7 @@ public class Picture implements Serializable, Comparable<Picture> {
     private String url;
 
     @Column(name = "loadpath")
-    @JsonIgnore
+    @JsonProperty("loadpath")
     private String loadpath;
 
 
@@ -39,7 +37,8 @@ public class Picture implements Serializable, Comparable<Picture> {
         this.countLike = countLike;
     }
 
-    public Picture(){}
+    public Picture() {
+    }
 
 
     @Override
@@ -52,8 +51,5 @@ public class Picture implements Serializable, Comparable<Picture> {
                 '}';
     }
 
-    @Override
-    public int compareTo(Picture o) {
-        return this.id - o.id;
-    }
+
 }

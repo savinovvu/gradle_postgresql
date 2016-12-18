@@ -1,20 +1,14 @@
 package ru.inbox.savinov_vu.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import ru.inbox.savinov_vu.model.Picture;
-
 /**
  * Created by skorpion on 27.09.16.
  */
 public interface PictureService {
-    public boolean save(Picture savedFile);
 
-    public String read() throws JsonProcessingException;
-    public String read(int id) throws JsonProcessingException;
+     String read() ;
 
-    public boolean create(Picture savedFile);
 
-    public boolean delete(Picture savedFile);
+     boolean put(String url);
 
-    public Picture getOnId(int id);
+
 }

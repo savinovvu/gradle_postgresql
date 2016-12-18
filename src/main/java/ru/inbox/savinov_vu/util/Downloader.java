@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Downloader {
+    private Downloader(){}
 
 
     public static void downloadFiles(String strURL, String strPath, int buffSize) {
@@ -28,7 +29,7 @@ public class Downloader {
             writer.close();
             in.close();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 }

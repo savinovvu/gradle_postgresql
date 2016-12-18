@@ -1,47 +1,71 @@
 package ru.inbox.savinov_vu.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.inbox.savinov_vu.model.Picture;
 import ru.inbox.savinov_vu.repository.SavedPictureRepository;
+import ru.inbox.savinov_vu.util.Downloader;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
 
 @org.springframework.stereotype.Service
 public class ServiceImpl implements PictureService {
     @Autowired
-    SavedPictureRepository repository;
+    private SavedPictureRepository repository;
+
 
     @Override
-    public boolean save(Picture picture) {
-
-            return false;
+    public String read() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(repository.findAll());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
-
-    @Override
-    public String read() throws JsonProcessingException {
-        return null;
+        return "mistake in read method Service";
     }
 
-    @Override
-    public String read(int id) throws JsonProcessingException {
-        return String.valueOf(repository.findOne(id));
-    }
 
     @Override
-    public boolean create(Picture savedFile) {
+    public boolean put(String url) {
+        try {
+            Document document = Jsoup.connect(url).get();
+
+            Elements metaElements = document.select("meta");
+            String pictureURL = "";
+            int like = 0;
+            for (Element element : metaElements) {
+                String elementString = String.valueOf(element);
+                if (elementString.contains("<meta property=\"og:image\"")) {
+                    pictureURL = element.attr("content");
+                }
+
+                if (elementString.contains("name=\"description\"")) {
+                    like = Integer.valueOf(elementString.replaceAll("\\D", ""));
+
+                }
+
+            }
+            String path = String.format("src/main/resources/public/filesJpg/%s.jpg", LocalDateTime.now());
+            Downloader.downloadFiles(pictureURL, path, 30000);
+
+            repository.saveAndFlush(new Picture(url, path, like));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
-    @Override
-    public boolean delete(Picture savedFile) {
-        return false;
-    }
-
-    @Override
-    public Picture getOnId(int id) {
-        return null;
-    }
 
 }
+
 
 
 

@@ -56,11 +56,10 @@ dependencies {
     compile 'org.hsqldb:hsqldb:2.3.4'
     compile 'org.apache.tomcat:tomcat-jdbc:9.0.0.M11'
 
-    /*pdf Generation*/
-    compile 'com.itextpdf:itextpdf:5.5.10'
-    compile 'org.bouncycastle:bcprov-jdk15on:1.55'
+    /*jsoup - html parser*/
+    compile "org.jsoup:jsoup:1.8.3"
 
-    /*Spark*/
+     /*Spark*/
     compile 'com.sparkjava:spark-core:2.5'
 
     /*Junit*/
