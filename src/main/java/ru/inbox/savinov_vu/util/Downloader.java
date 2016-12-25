@@ -5,14 +5,17 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDateTime;
 
 public class Downloader {
     private Downloader() {
     }
 
 
-    public static void downloadFiles(String strURL, String strPath, int buffSize) {
+    public static void downloadFiles(String strURL) {
         try {
+            int buffSize = 32000;
+            String strPath = String.format("src/main/resources/public/filesJpg/%s.txt", LocalDateTime.now());
             URL connection = new URL(strURL);
 
             HttpURLConnection urlconn = (HttpURLConnection) connection.openConnection();
