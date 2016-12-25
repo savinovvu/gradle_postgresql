@@ -9,6 +9,7 @@ import org.jinstagram.auth.oauth.InstagramService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import ru.inbox.savinov_vu.util.Downloader;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -71,7 +72,8 @@ public class PictureController {
                 });
                 String json2 = String.valueOf(map.get("images"));
                 json2 = json2.split("standard_resolution=")[1].split("url=")[1].split(",")[0];
-                System.out.println(json2);
+                Downloader.downloadFiles(json2);
+
             }
 
 

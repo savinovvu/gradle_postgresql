@@ -15,7 +15,7 @@ public class Downloader {
     public static void downloadFiles(String strURL) {
         try {
             int buffSize = 32000;
-            String strPath = String.format("src/main/resources/public/filesJpg/%s.txt", LocalDateTime.now());
+            String strPath = String.format("src/main/resources/public/filesJpg/%s.jpg", LocalDateTime.now());
             URL connection = new URL(strURL);
 
             HttpURLConnection urlconn = (HttpURLConnection) connection.openConnection();

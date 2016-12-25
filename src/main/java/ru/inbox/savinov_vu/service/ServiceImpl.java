@@ -53,7 +53,7 @@ public class ServiceImpl implements PictureService {
 
             }
             String path = String.format("src/main/resources/public/filesJpg/%s.jpg", LocalDateTime.now());
-            Downloader.downloadFiles(pictureURL, path, 30000);
+            Downloader.downloadFiles(pictureURL);
 
             repository.saveAndFlush(new Picture(url, path, like));
 
