@@ -8,7 +8,7 @@ version '2.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'application'
-mainClassName = "ru.inbox.savinov_vu.Main"
+mainClassName = "ru.inbox.savinov_vu.config.ApplicationStartConfig"
 
 
 tasks.withType(Compile) {
