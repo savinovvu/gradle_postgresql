@@ -11,10 +11,13 @@
 </head>
 <body onload="getAll()">
 
+<a href="https://api.instagram.com/oauth/authorize/?client_id=43f2b9f73a2841e7af9dff5712fe29e6&redirect_uri=http://localhost:4567/getCode&response_type=code"
+ >аутентифицироваться и получить фото</a>
 
-<form onsubmit="getPictureWithURL()">
 
-    <input type="url" name="url" id="url" placeholder="instagram url" required><br>
+<form onsubmit="getrequest()">
+
+    <input type="url" name="url" id="url" placeholder="instagram url" ><br>
     <input type="submit"  value="Отправить">
 </form>
 

@@ -3,11 +3,14 @@ function getPictureWithURL() {
 
     data["url"] = $("#url").val();
     send("/picture", "PUT", data);
-    
+
 }
 
+function getrequest() {
 
+    send("/start", "GET");
 
+}
 
 
 function getAll() {
@@ -43,9 +46,6 @@ function send(url, type, jsonData) {
 }
 
 
-
-
-
 function view(data) {
 
 
@@ -68,8 +68,6 @@ function view(data) {
         output += "</td>";
 
 
-      
-
         output += "</form> " +
             "</tr>";
 
@@ -78,3 +76,34 @@ function view(data) {
 
     });
 }
+
+/*
+
+{
+    "user"
+:
+    {
+        "id"
+    :
+        "2999480870", "profile_picture"
+    :
+        "https://scontent.cdninstagram.com/t51.2885-19/s150x150/14369117_341042442906745_1085733992_a.jpg", "bio"
+    :
+        "", "username"
+    :
+        "sav4nn4", "full_name"
+    :
+        "\u0410\u043d\u043d\u0430 \u0421\u0430\u0432\u0438\u043d\u043e\u0432\u0430", "website"
+    :
+        ""
+    }
+,
+    "access_token"
+:
+    "2999480870.43f2b9f.d873416ad8ab430bbf4a8b82597a6cd7"
+}
+*/
+
+
+
+ 

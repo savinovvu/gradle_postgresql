@@ -62,6 +62,9 @@ dependencies {
      /*Spark*/
     compile 'com.sparkjava:spark-core:2.5'
 
+    /*jinstagram*/
+    compile 'com.sachinhandiekar:jInstagram:1.1.8'
+
     /*Junit*/
     testCompile group: 'junit', name: 'junit', version: '4.11'
 

@@ -7,7 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Downloader {
-    private Downloader(){}
+    private Downloader() {
+    }
 
 
     public static void downloadFiles(String strURL, String strPath, int buffSize) {
@@ -17,6 +18,7 @@ public class Downloader {
             HttpURLConnection urlconn = (HttpURLConnection) connection.openConnection();
             urlconn.setRequestMethod("GET");
             urlconn.connect();
+            urlconn.getURL();
             InputStream in = urlconn.getInputStream();
             OutputStream writer = new FileOutputStream(strPath);
             byte buffer[] = new byte[buffSize];
