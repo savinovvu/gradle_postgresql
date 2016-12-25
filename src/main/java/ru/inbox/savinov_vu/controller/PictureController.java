@@ -46,8 +46,6 @@ public class PictureController {
             Verifier verifier = new Verifier(request.queryParams("code"));
             Token accessToken = instagramService.getAccessToken(verifier);
 
-            System.out.println("началось");
-
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(String
                     .format("https://api.instagram.com/v1/users/self/media/liked?access_token=%s", accessToken.getToken())).openStream()));
@@ -67,7 +65,6 @@ public class PictureController {
 
             for (int i = 0; i < jsonArray.size(); i++) {
                 //System.out.println(jsonArray.get(i));
-                System.out.println("+_+_+_+_+_+_+_+_+_");
                 Map<String, Object> map = mapper.readValue(String.valueOf(jsonArray.get(i)), new TypeReference<Map<String, Object>>() {
                 });
                 String json2 = String.valueOf(map.get("images"));
@@ -77,10 +74,9 @@ public class PictureController {
             }
 
 
-            System.out.println("закончилось");
 
 
-            return "s";
+            return "program root/main/resources/public/filesJpg";
         });
 
 
