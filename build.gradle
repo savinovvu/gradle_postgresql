@@ -32,11 +32,16 @@ repositories {
 
 dependencies {
 
+
+
     /*Jackson*/
     def jacksonVersion = '2.8.4'
     compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
     compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
     compile "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+
+    /*JSON simple*/
+    compile "com.googlecode.json-simple:json-simple:1.1.1"
 
     /*Hibernate*/
     def hibernateVersion = '5.2.3.Final'

@@ -1,27 +1,31 @@
 package ru.inbox.savinov_vu.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jinstagram.auth.InstagramAuthService;
 import org.jinstagram.auth.model.Token;
 import org.jinstagram.auth.model.Verifier;
 import org.jinstagram.auth.oauth.InstagramService;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.Map;
 
-import static spark.Spark.*;
+import static spark.Spark.get;
+import static spark.Spark.staticFileLocation;
 
 public class PictureController {
     /* @Autowired
      private PictureService pictureService;*/
 
-    private static final Token EMPTY_TOKEN = null;
     private String pictureFolderPath = "src/main/resources/public/filesJpg/";
-    static int b;
+
+    ObjectMapper mapper = new ObjectMapper();
 
     public void start() throws IOException {
 
@@ -29,9 +33,6 @@ public class PictureController {
 
 
         get("/getCode", (request, response) -> {
-            System.out.println(++b);
-            String code = request.queryParams("code");
-            System.out.println(code);
 
             InstagramService instagramService = new InstagramAuthService()
                     .apiKey("43f2b9f73a2841e7af9dff5712fe29e6")
@@ -41,89 +42,52 @@ public class PictureController {
                     .build();
 
 
-            String authorizationUrl = instagramService.getAuthorizationUrl();
-            Verifier verifier = new Verifier(code);
+            Verifier verifier = new Verifier(request.queryParams("code"));
             Token accessToken = instagramService.getAccessToken(verifier);
-            System.out.println(accessToken);
+
+            System.out.println("началось");
+
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(String
+                    .format("https://api.instagram.com/v1/users/self/media/liked?access_token=%s", accessToken.getToken())).openStream()));
+
+            String jsonString = "";
+            String inputLine = "";
+            while ((inputLine = reader.readLine()) != null) {
+                jsonString += inputLine;
+            }
+            reader.close();
+
+
+            JSONObject json = (JSONObject) new JSONParser().parse(jsonString);
+
+            JSONArray jsonArray = (JSONArray) json.get("data");
+
+
+            for (int i = 0; i < jsonArray.size(); i++) {
+                //System.out.println(jsonArray.get(i));
+                System.out.println("+_+_+_+_+_+_+_+_+_");
+                Map<String, Object> map = mapper.readValue(String.valueOf(jsonArray.get(i)), new TypeReference<Map<String, Object>>() {
+                });
+                String json2 = String.valueOf(map.get("images"));
+                json2 = json2.split("standard_resolution=")[1].split("url=")[1].split(",")[0];
+                System.out.println(json2);
+            }
+
+
+            System.out.println("закончилось");
 
 
             return "s";
         });
 
-        post("/getCode", (request, response) -> {
-            System.out.println(++b);
-            System.out.println(b);
-            System.out.println(b);
-            System.out.println(b);
-            System.out.println("пост");
-            System.out.println("пост");
-            System.out.println("пост");
 
-            System.out.println(request.body());
-
-          /*  String s = pictureService.read();
-            System.out.println("строка");
-            System.out.println(s);*/
-
-            return "s";
-        });
-
-
-        String urlString = "https://api.instagram.com/oauth/authorize/?client_id=43f2b9f73a2841e7af9dff5712fe29e6&redirect_uri=http://localhost:4567/getCode&response_type=code";
-
-
-
-
-
-     /*   URL url = new URL(urlString);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        // By default it is GET request
-        con.setRequestMethod("GET");
-        //add request header
-        int responseCode = con.getResponseCode();
-        System.out.println("Sending get request : "+ url);
-        System.out.println("Response code : "+ responseCode);
-        // Reading response from input Stream
-        //printing result from response
-        System.out.println("выслали");*/
-
-        /*HttpURLConnection httpURLConnection = (HttpURLConnection)(new URL( urlString ).openConnection());
-        httpURLConnection.setInstanceFollowRedirects( true
-        );
-        httpURLConnection.connect();
-        int code = httpURLConnection.getResponseCode();
-        System.out.println( code );
-        String location = httpURLConnection.getHeaderField( "code");
-        System.out.println( location );
-*/
-
-
-      /*  put("/picture", (request, response) -> {
-            ObjectMapper mapper = new ObjectMapper();
-            System.out.println("до " + request.body());
-            Map<String, Object> map = mapper.readValue(request.body(), new TypeReference<Map<String, Object>>() {
-            });
-            String url = (String) map.get("url");
-            pictureService.put(url);
-            return pictureService.read();
-        });
-
-
-        get("/readAll", (request, response) -> {
-            String s = pictureService.read();
-            System.out.println("строка");
-            System.out.println(s);
-
-            return s;
-        });*/
         get("/start", (request, res) -> {
             try {
-
-                // String strURL = "https://api.instagram.com/v1/users/self/media/liked?access_token=2999480870.43f2b9f.d873416ad8ab430bbf4a8b82597a6cd7";
-                String strURL = "https://api.instagram.com/oauth/authorize/?client_id=43f2b9f73a2841e7af9dff5712fe29e6&redirect_uri=http://localhost:4567//getCode&response_type=token";
-                //String strURL = "https://api.instagram.com/oauth/authorize/";
+                String strURL = "https://api.instagram.com/v1/users/self/media/liked?access_token=2999480870.43f2b9f.d873416ad8ab430bbf4a8b82597a6cd7";
 
                 URL connection = new URL(strURL);
+
                 String strPath = String.format("src/main/resources/public/filesJpg/%s.txt", LocalDateTime.now());
                 int buffSize = 1000;
 
@@ -151,22 +115,6 @@ public class PictureController {
             System.out.println("все норм");
             return "KO";
         });
-
-
-
-
-          /*  get(String.format("/getPicture/%s:name", pictureFolderPath), (request, response) -> {
-            String path = pictureFolderPath + request.params(":name");
-            byte[] bytes = Files.readAllBytes(Paths.get(path));
-            ServletOutputStream outputStream = response.raw().getOutputStream();
-            outputStream.write(bytes);
-            outputStream.flush();
-            outputStream.close();
-
-
-
-            return "Ko";
-        });*/
 
 
     }

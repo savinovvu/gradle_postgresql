@@ -37,7 +37,7 @@ function send(url, type, jsonData) {
 
         },
         error: function (x) {
-            alert("подождите загружается, перезагрузите страницу");
+            //   alert("подождите загружается, перезагрузите страницу");
 
         }
 
@@ -76,34 +76,120 @@ function view(data) {
 
     });
 }
-
 /*
-
 {
-    "user"
-:
-    {
-        "id"
+    "created_time": "1474273821", "images": {
+        "thumbnail"
     :
-        "2999480870", "profile_picture"
+        {
+            "width"
+        :
+            150, "url"
+        :
+            "https:\/\/scontent.cdninstagram.com\/t51.2885-15\/s150x150\/e15\/14287995_1188564504522760_1926586016_n.jpg?ig_cache_key=MTM0MjYyODU4MjA2ODk2OTM1OA%3D%3D.2", "height"
+        :
+            150
+        }
+    ,
+        "low_resolution"
     :
-        "https://scontent.cdninstagram.com/t51.2885-19/s150x150/14369117_341042442906745_1085733992_a.jpg", "bio"
+        {
+            "width"
+        :
+            320, "url"
+        :
+            "https:\/\/scontent.cdninstagram.com\/t51.2885-15\/s320x320\/e15\/14287995_1188564504522760_1926586016_n.jpg?ig_cache_key=MTM0MjYyODU4MjA2ODk2OTM1OA%3D%3D.2", "height"
+        :
+            320
+        }
+    ,
+        "standard_resolution"
     :
-        "", "username"
-    :
-        "sav4nn4", "full_name"
-    :
-        "\u0410\u043d\u043d\u0430 \u0421\u0430\u0432\u0438\u043d\u043e\u0432\u0430", "website"
-    :
-        ""
+        {
+            "width"
+        :
+            612, "url"
+        :
+            "https:\/\/scontent.cdninstagram.com\/t51.2885-15\/e15\/14287995_1188564504522760_1926586016_n.jpg?ig_cache_key=MTM0MjYyODU4MjA2ODk2OTM1OA%3D%3D.2", "height"
+        :
+            612
+        }
     }
 ,
-    "access_token"
+    "comments"
 :
-    "2999480870.43f2b9f.d873416ad8ab430bbf4a8b82597a6cd7"
+    {
+        "count"
+    :
+        0
+    }
+,
+    "users_in_photo"
+:
+    [], "user_has_liked"
+:
+    true, "link"
+:
+    "https:\/\/www.instagram.com\/p\/BKh-ZTzgd-O\/", "caption"
+:
+    {
+        "created_time"
+    :
+        "1474273821", "from"
+    :
+        {
+            "full_name"
+        :
+            "Анна Савинова", "profile_picture"
+        :
+            "https:\/\/scontent.cdninstagram.com\/t51.2885-19\/s150x150\/14369117_341042442906745_1085733992_a.jpg", "id"
+        :
+            "2999480870", "username"
+        :
+            "sav4nn4"
+        }
+    ,
+        "text"
+    :
+        "Севастопольская набережная", "id"
+    :
+        "17842492660178673"
+    }
+,
+    "type"
+:
+    "image", "tags"
+:
+    [], "filter"
+:
+    "Normal", "attribution"
+:
+    null, "location"
+:
+    null, "id"
+:
+    "1342628582068969358_2999480870", "user"
+:
+    {
+        "full_name"
+    :
+        "Анна Савинова", "profile_picture"
+    :
+        "https:\/\/scontent.cdninstagram.com\/t51.2885-19\/s150x150\/14369117_341042442906745_1085733992_a.jpg", "id"
+    :
+        "2999480870", "username"
+    :
+        "sav4nn4"
+    }
+,
+    "likes"
+:
+    {
+        "count"
+    :
+        2
+    }
 }
+
+
 */
-
-
-
- 
