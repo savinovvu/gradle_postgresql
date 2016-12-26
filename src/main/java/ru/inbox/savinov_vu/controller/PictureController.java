@@ -34,7 +34,7 @@ public class PictureController {
 
         staticFileLocation("/public");
 
-
+        /*get verifier code and url from instagram*/
         get("/getCode", (request, response) -> {
 
             InstagramService instagramService = new InstagramAuthService()
