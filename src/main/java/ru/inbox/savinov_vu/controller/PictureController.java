@@ -9,6 +9,8 @@ import org.jinstagram.auth.oauth.InstagramService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
+import ru.inbox.savinov_vu.service.PictureService;
 import ru.inbox.savinov_vu.util.Downloader;
 
 import java.io.*;
@@ -21,8 +23,8 @@ import static spark.Spark.get;
 import static spark.Spark.staticFileLocation;
 
 public class PictureController {
-    /* @Autowired
-     private PictureService pictureService;*/
+     @Autowired
+     private PictureService pictureService;
 
     private String pictureFolderPath = "src/main/resources/public/filesJpg/";
 
@@ -64,7 +66,6 @@ public class PictureController {
 
 
             for (int i = 0; i < jsonArray.size(); i++) {
-                //System.out.println(jsonArray.get(i));
                 Map<String, Object> map = mapper.readValue(String.valueOf(jsonArray.get(i)), new TypeReference<Map<String, Object>>() {
                 });
                 String json2 = String.valueOf(map.get("images"));
@@ -73,10 +74,7 @@ public class PictureController {
 
             }
 
-
-
-
-            return "program root/main/resources/public/filesJpg";
+            return "<a href=\"http://localhost:4567\">на стартовую</a>";
         });
 
 
@@ -119,7 +117,3 @@ public class PictureController {
 
 
 }
-
-
-
-
