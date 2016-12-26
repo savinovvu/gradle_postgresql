@@ -28,7 +28,6 @@ public class PictureController {
 
     private String pictureFolderPath = "src/main/resources/public/filesJpg/";
 
-    ObjectMapper mapper = new ObjectMapper();
 
     public void start() throws IOException {
 
@@ -36,19 +35,14 @@ public class PictureController {
 
         /*get verifier code and url from instagram*/
         get("/getCode", (request, response) -> {
-
             InstagramService instagramService = new InstagramAuthService()
                     .apiKey("43f2b9f73a2841e7af9dff5712fe29e6")
                     .apiSecret("1bc12cc086c0402f86dce4d20fd86523")
                     .callback("http://localhost:4567/getCode")
                     .scope("public_content")
                     .build();
-
-
             Verifier verifier = new Verifier(request.queryParams("code"));
             Token accessToken = instagramService.getAccessToken(verifier);
-
-
             BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(String
                     .format("https://api.instagram.com/v1/users/self/media/liked?access_token=%s", accessToken.getToken())).openStream()));
 
@@ -64,7 +58,7 @@ public class PictureController {
 
             JSONArray jsonArray = (JSONArray) json.get("data");
 
-
+            ObjectMapper mapper = new ObjectMapper();
             for (int i = 0; i < jsonArray.size(); i++) {
                 Map<String, Object> map = mapper.readValue(String.valueOf(jsonArray.get(i)), new TypeReference<Map<String, Object>>() {
                 });
