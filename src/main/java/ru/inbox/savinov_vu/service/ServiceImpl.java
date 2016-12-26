@@ -2,16 +2,11 @@ package ru.inbox.savinov_vu.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.inbox.savinov_vu.model.Picture;
 import ru.inbox.savinov_vu.repository.SavedPictureRepository;
 import ru.inbox.savinov_vu.util.Downloader;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 
 @org.springframework.stereotype.Service
@@ -31,6 +26,23 @@ public class ServiceImpl implements PictureService {
         return "mistake in read method Service";
     }
 
+
+    @Override
+    public boolean put(String url) {
+
+        String path = String.format("src/main/resources/public/filesJpg/%s.jpg", LocalDateTime.now());
+        Downloader.downloadFiles(url, path);
+
+        repository.saveAndFlush(new Picture(url, path));
+
+
+        return true;
+    }
+
+}
+
+    /*
+    html page parsing. save for next projects
 
     @Override
     public boolean put(String url) {
@@ -61,10 +73,7 @@ public class ServiceImpl implements PictureService {
             e.printStackTrace();
         }
         return false;
-    }
-
-
-}
+    }*/
 
 
 

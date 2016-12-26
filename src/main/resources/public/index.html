@@ -12,28 +12,31 @@
 <body onload="getAll()">
 
 <a href="https://api.instagram.com/oauth/authorize/?client_id=43f2b9f73a2841e7af9dff5712fe29e6&redirect_uri=http://localhost:4567/getCode&response_type=code"
- >аутентифицироваться в инстаграмме и получить фото</a>
+ >аутентифицироваться в инстаграме и получить фото</a>
 
 <p>Фото будут доступны по адресу: program root/main/resources/public/filesJpg</p>
 <p>Так-как программа работает в песочнице, загружены будут только фотографии, которые были лайкнуты на своем аккаунте.</p>
 
-<!--<form onsubmit="getrequest()">
 
-    <input type="url" name="url" id="url" placeholder="instagram url" ><br>
-    <input type="submit"  value="Отправить">
-</form>
 
 <table id="pictureT">
     <thead>
     <tr>
         <td>Id</td>
         <td>URL</td>
-        <td>countLike</td>
     </tr>
-    </thead>-->
+    </thead>
 
-<!--</table>-->
+</table>
 
 
 </body>
 </html>
+
+<!--
+оставлено как пример onsubmit = function, для валидации формы.
+<form onsubmit="getAll()">
+
+    <input type="url" name="url" id="url" placeholder="instagram url" ><br>
+    <input type="submit"  value="Отправить">
+</form>-->

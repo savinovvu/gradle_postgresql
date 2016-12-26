@@ -11,12 +11,14 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.inbox.savinov_vu.service.PictureService;
-import ru.inbox.savinov_vu.util.Downloader;
 
-import java.io.*;
-import java.net.HttpURLConnection;
+import javax.servlet.ServletOutputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
-import java.time.LocalDateTime;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Map;
 
 import static spark.Spark.get;
@@ -25,6 +27,8 @@ import static spark.Spark.staticFileLocation;
 public class PictureController {
      @Autowired
      private PictureService pictureService;
+
+
 
     private String pictureFolderPath = "src/main/resources/public/filesJpg/";
 
@@ -53,57 +57,35 @@ public class PictureController {
             }
             reader.close();
 
-
             JSONObject json = (JSONObject) new JSONParser().parse(jsonString);
-
             JSONArray jsonArray = (JSONArray) json.get("data");
-
             ObjectMapper mapper = new ObjectMapper();
             for (int i = 0; i < jsonArray.size(); i++) {
                 Map<String, Object> map = mapper.readValue(String.valueOf(jsonArray.get(i)), new TypeReference<Map<String, Object>>() {
                 });
                 String json2 = String.valueOf(map.get("images"));
-                json2 = json2.split("standard_resolution=")[1].split("url=")[1].split(",")[0];
-                Downloader.downloadFiles(json2);
+                String url = json2.split("standard_resolution=")[1].split("url=")[1].split(",")[0];
+                pictureService.put(url);
 
             }
 
-            return "<a href=\"http://localhost:4567\">на стартовую</a>";
+            return "<a href=\"http://localhost:4567\">выбрать и посмотреть фото</a>";
         });
 
 
-        get("/start", (request, res) -> {
-            try {
-                String strURL = "https://api.instagram.com/v1/users/self/media/liked?access_token=2999480870.43f2b9f.d873416ad8ab430bbf4a8b82597a6cd7";
+        get("/getAll", (request, res) ->
+             pictureService.read()
+        );
 
-                URL connection = new URL(strURL);
-
-                String strPath = String.format("src/main/resources/public/filesJpg/%s.txt", LocalDateTime.now());
-                int buffSize = 1000;
-
-                HttpURLConnection urlconn = (HttpURLConnection) connection.openConnection();
-                urlconn.setRequestMethod("GET");
-                urlconn.connect();
+        get( "/file/" + pictureFolderPath + ":name", (request, response) -> {
 
 
-                InputStream inputStream = urlconn.getInputStream();
-                OutputStream writer = new FileOutputStream(strPath);
-                byte buffer[] = new byte[buffSize];
-                int c = inputStream.read(buffer);
-                while (c > 0) {
-                    writer.write(buffer, 0, c);
-                    c = inputStream.read(buffer);
-                }
-                writer.flush();
-                writer.close();
-                inputStream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-            System.out.println("все норм");
-            return "KO";
+            byte[] bytes = Files.readAllBytes(Paths.get(pictureFolderPath + request.params(":name")));
+            ServletOutputStream outputStream = response.raw().getOutputStream();
+            outputStream.write(bytes);
+            outputStream.flush();
+            outputStream.close();
+            return response;
         });
 
 

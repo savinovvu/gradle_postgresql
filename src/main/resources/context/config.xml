@@ -21,10 +21,10 @@
 
     <context:property-placeholder location="classpath:db/db.properties"/>
 
-<!--    <jdbc:initialize-database data-source="dataSource" enabled="${database.init}" >
+    <jdbc:initialize-database data-source="dataSource" enabled="${database.init}" >
         <jdbc:script location="${jdbc.initLocation}"/>
-      &lt;!&ndash;  <jdbc:script encoding="utf-8" location="${jdbc.populateLocation}"/>&ndash;&gt;
-    </jdbc:initialize-database>-->
+        <jdbc:script encoding="utf-8" location="${jdbc.populateLocation}"/>
+    </jdbc:initialize-database>
 
 
 
